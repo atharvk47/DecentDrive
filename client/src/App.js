@@ -57,6 +57,12 @@ function App() {
       <p style={{ color: "white"}}>
         Account: {account ? account : "Not Connected" }
       </p>
+
+      <FileUpload
+          account={account}
+          provider={provider}
+          contract={contract}
+        ></FileUpload>
     </div>
   );
 }
