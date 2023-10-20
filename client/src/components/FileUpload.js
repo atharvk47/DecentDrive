@@ -11,7 +11,7 @@ const FileUpload = ({account, provider, contract}) => {
     if(file){
       try{
         const formData=new FormData()
-        formData("file", file);
+        formData.append("file", file);
 
         
         const resFile = await axios({
@@ -27,7 +27,7 @@ const FileUpload = ({account, provider, contract}) => {
 
         const ImgHash = `ipfs://${resFile.data.IpfsHash}`;
         // const signer = contract.connect(provider.getSigner())
-        await contract.add(account, ImgHash);
+        contract.add(account, ImgHash);
         alert("Image uploaded successfully");
         setFileName("No Image selected");
         setFile(null);
@@ -36,7 +36,17 @@ const FileUpload = ({account, provider, contract}) => {
       }
     }
   };
-  const retrieveFile =()=> {};
+  const retrieveFile =(e)=> {
+    const data = e.target.files[0];
+    console.log(data);
+    const reader = new window.FileReader();
+    reader.readAsArrayBuffer(data);
+    reader.onloadend=() => {
+      setFile(e.target.files[0])
+    }
+    setFileName(e.target.files[0].name);
+    e.preventDefault();
+  };
   return (
     <div className="top">
       <form className="form" onSubmit={handleSubmit}>
@@ -45,7 +55,7 @@ const FileUpload = ({account, provider, contract}) => {
         </label>
         <input disabled={!account} type="file" id="file-upload" name="data" onChange={retrieveFile}/>
         <span className="textArea">Image: {fileName} </span>
-        <button type="submit" className="upload">Upload File</button>
+        <button type="submit" className="upload" disabled={!file}>Upload File</button>
       </form>
     </div>
   );
