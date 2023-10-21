@@ -48,6 +48,10 @@ function App() {
     provider && loadProvider()
   },[])
   return (
+    <>
+    {!modalOpen && (<button className='share' onClick={() => setModalOpen(true)}> Share </button>)}
+    {modalOpen && (<Modal setModalOpen={setModalOpen} contract={contract}></Modal>)}
+    
     <div className="App">
       <h1 style = {{color: "white"}} > Storage Drive</h1>
       <div class="bg"></div>
@@ -63,7 +67,9 @@ function App() {
           provider={provider}
           contract={contract}
         ></FileUpload>
+        <Display contract={contract} account={account}></Display>
     </div>
+    </>
   );
 }
 
