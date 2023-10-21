@@ -5,13 +5,18 @@ const Display = ({contract, account}) => {
   const [data, setData]= useState("")
   const getData = async() => {
     let dataArray;
-    const Otheraddress = document.querySelector(".address").ariaValueMax;
-    if(Otheraddress){
-      dataArray = await contract.display(Otheraddress);
-      console.log(dataArray);
-    }else{
-      dataArray = await contract.display(account);
+    const Otheraddress = document.querySelector(".address").value;
+    try{
+      if(Otheraddress){
+        dataArray = await contract.display(Otheraddress);
+        console.log(dataArray);
+      }else{
+        dataArray = await contract.display(account);
+      }
+    }catch(e){
+      alert("You don't have access")
     }
+    
     const isEmpty = Object.keys(dataArray).length === 0;
 
     if(!isEmpty){
