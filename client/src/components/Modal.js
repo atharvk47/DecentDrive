@@ -8,6 +8,22 @@ const Modal = ({setModalOpen, contract}) => {
     await contract.allow(address)
     console.log("Shared!");
   }
+  useEffect(() => {
+    const accessList = async() => {                // Providing a dropdown menu for the list of shared access
+      const addressList = await contract.shareAccess();
+      let select = document.querySelector("#selectNumber");
+      const options = addressList;
+
+      for(let i =0; i< options.length;i++){
+        let opt = options[i];
+        let el = document.createElement("option");
+        el.textContent = opt;
+        el.value = opt;
+        select.appendChild(el);
+      }
+    }
+    contract && accessList();
+  },[])
   return (
     <>
       <div className="modalBackground">
