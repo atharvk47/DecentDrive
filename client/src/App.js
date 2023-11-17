@@ -53,7 +53,7 @@ function App() {
     {modalOpen && (<Modal setModalOpen={setModalOpen} contract={contract}></Modal>)}
     
     <div className="App">
-      <h1 style = {{color: "white"}} > Storage Drive</h1>
+      <h1 style = {{color: "white"}} > Storage Drive </h1>
       <div class="bg"></div>
       <div class="bg bg2"></div>
       <div class="bg bg3"></div>

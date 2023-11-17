@@ -23,7 +23,7 @@ const FileUpload = ({ contract, account, provider }) => {
         });
         const ImgHash = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}`;
         contract.add(account,ImgHash);
-        alert("Successfully Image Uploaded");
+        //alert("Successfully Image Uploaded");
         setFileName("No image selected");
         setFile(null);
       } catch (e) {
@@ -48,9 +48,11 @@ const FileUpload = ({ contract, account, provider }) => {
   return (
     <div className="top">
       <form className="form" onSubmit={handleSubmit}>
+        <div className="top">
         <label htmlFor="file-upload" className="choose">
           Choose Image
         </label>
+        </div>
         <input
           disabled={!account}
           type="file"
@@ -58,10 +60,14 @@ const FileUpload = ({ contract, account, provider }) => {
           name="data"
           onChange={retrieveFile}
         />
+        <div className="top">
         <span className="textArea">Image: {fileName}</span>
+        </div>
+        <div className="top">
         <button type="submit" className="upload" disabled={!file}>
           Upload File
         </button>
+        </div>
       </form>
     </div>
   );
